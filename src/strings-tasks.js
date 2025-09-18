@@ -235,8 +235,14 @@ function endsWith(str, substr) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  const padZero = (num) => {
+    return String(num).padStart(2, '0');
+  };
+
+  const formattedMinutes = padZero(minutes);
+  const formattedSeconds = padZero(seconds);
+  return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 /**
@@ -320,10 +326,18 @@ function countVowels(str) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const replaseStr = str.replace(/[^\w\s]|_!/g, ' ').replaceAll(' ', '');
+  const reverseStr = [...str]
+    .reverse()
+    .join('')
+    .replace(/[^\w\s]|_!/g, ' ')
+    .replaceAll(' ', '');
+  if (reverseStr.toUpperCase() === replaseStr.toUpperCase()) {
+    return true;
+  }
+  return false;
 }
-
 /**
  * Find the longest word in the sentence. If there are multiple longest words,
  * the function returns the first one encountered.
